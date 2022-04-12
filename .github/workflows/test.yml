@@ -1,0 +1,38 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '14.x' # set this to the node version to use (supports 8.x, 10.x, 12.x)
+
+jobs:
+  test-frontend:
+    runs-on: macos-latest
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v2
+
+      - name: Setup Node ${{ env.NODE_VERSION }} Environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: 'install, build'
+        shell: bash
+        run: |
+          pushd './'
+          yarn install
+          yarn build
+          popd
+      - name: Jest coverage report (frontend)
+        uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          package-manager: yarn
