@@ -75,5 +75,8 @@
   "dependencies": {
     "@dnd-kit/core": "^5.0.3",
     "@dnd-kit/sortable": "^6.0.1"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   }
 }
