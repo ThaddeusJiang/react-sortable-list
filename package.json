@@ -1,7 +1,7 @@
 {
   "name": "@thaddeusjiang/react-sortable-list",
   "author": "Thaddeus Jiang",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -78,5 +78,19 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
-  }
+  },
+  "homepage": "https://github.com/ThaddeusJiang/react-sortable-list#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThaddeusJiang/react-sortable-list.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ThaddeusJiang/react-sortable-list/issues"
+  },
+  "keywords": [
+    "JSON",
+    "JSON.parse()",
+    "safe",
+    "no exception"
+  ]
 }

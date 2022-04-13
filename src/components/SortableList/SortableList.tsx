@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 import {
   DndContext,
   closestCenter,
@@ -18,19 +18,24 @@ import { SortableItem } from './SortableItem';
 
 export type SortableItemProps = { id: string } & { [key: string]: any };
 
+export type ItemRenderProps = {
+  item: SortableItemProps;
+};
+
+export type ChildrenProps = {
+  items: SortableItemProps[];
+};
+
 export type SortableListProps = {
   items: SortableItemProps[];
   setItems: React.Dispatch<React.SetStateAction<SortableItemProps[]>>;
-  children: ReactNode;
-};
-
-export type SortableListRenderProps = {
-  item: SortableItemProps;
+  itemRender?: ({ item }: ItemRenderProps) => JSX.Element;
+  children?: ({ items }: ChildrenProps) => JSX.Element;
 };
 
 // TODO: Headless UI Component
 export const SortableList: FC<SortableListProps> = (props) => {
-  const { items, setItems, children } = props;
+  const { items, setItems, children, itemRender } = props;
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -46,14 +51,16 @@ export const SortableList: FC<SortableListProps> = (props) => {
       onDragEnd={handleDragEnd}
     >
       <SortableContext items={items} strategy={verticalListSortingStrategy}>
-        {items.map((item) => {
-          return (
-            <SortableItem key={item.id} id={item.id}>
-              {/* @ts-ignore */}
-              {children({ item })}
-            </SortableItem>
-          );
-        })}
+        {children
+          ? children({ items })
+          : items.map((item) => {
+              return (
+                <SortableItem key={item.id} id={item.id}>
+                  {/* @ts-ignore */}
+                  {itemRender({ item })}
+                </SortableItem>
+              );
+            })}
       </SortableContext>
     </DndContext>
   );
