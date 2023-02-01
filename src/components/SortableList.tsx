@@ -39,11 +39,19 @@ export type SortableListProps = {
   itemRender?: ({ item }: ItemRenderProps) => JSX.Element;
   children?: ({ items }: ChildrenProps) => JSX.Element;
   horizontal?: boolean;
+  disabled?: boolean;
 };
 
 // TODO: Headless UI Component
 export const SortableList: FC<SortableListProps> = (props) => {
-  const { items, setItems, children, itemRender, horizontal } = props;
+  const {
+    items,
+    setItems,
+    children,
+    itemRender,
+    horizontal,
+    disabled = false,
+  } = props;
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -51,6 +59,16 @@ export const SortableList: FC<SortableListProps> = (props) => {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
+
+  if (disabled) {
+    return (
+      <>
+        {children
+          ? children({ items })
+          : items.map((item) => itemRender?.({ item }))}
+      </>
+    );
+  }
 
   return (
     <DndContext

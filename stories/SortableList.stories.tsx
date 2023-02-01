@@ -97,7 +97,7 @@ export const DragHandleExample: React.VFC = () => {
               key={item.id}
               id={item.id}
               DragHandler={DragHandler}
-              className="flex border items-center w-40"
+              className="flex border items-center w-40 bg-white"
             >
               <div>{item.name}</div>
             </SortableItem>
@@ -123,5 +123,21 @@ export const HorizontalExample: React.VFC = () => {
         horizontal
       />
     </div>
+  );
+};
+
+export const Disabled: React.VFC = () => {
+  const [items, setItems] = useState<SortableItemProps[]>([
+    { id: '1', name: 'Item 1' },
+    { id: '2', name: 'Item 2' },
+    { id: '3', name: 'Item 3' },
+  ]);
+  return (
+    <SortableList
+      disabled
+      items={items}
+      setItems={setItems}
+      itemRender={({ item }: ItemRenderProps) => <Item name={item.name} />}
+    />
   );
 };
