@@ -63,7 +63,7 @@ module.exports = {
 };
 ```
 
-### Use Case 1: ItemRender
+### Use Case: ItemRender
 
 ```jsx
 export const ItemRenderExample: React.VFC = () => {
@@ -86,7 +86,7 @@ export const ItemRenderExample: React.VFC = () => {
 };
 ```
 
-### Use Case 2: Children
+### Use Case: Children
 
 ```jsx
 export const ChildrenExample: React.VFC = () => {
@@ -111,9 +111,7 @@ export const ChildrenExample: React.VFC = () => {
 };
 ```
 
-### Use Case 3: Custom Drag Handler
-
-<details>
+### Use Case: Custom Drag Handler
 
 ```jsx
 
@@ -141,7 +139,7 @@ const DragHandler = (props) => (
   </div>
 );
 
-export const DragHandleExample: React.VFC = () => {
+export const DragHandlerExample: React.VFC = () => {
   const [items, setItems] = useState<SortableItemProps[]>([
     { id: '1', name: 'Item 1' },
     { id: '2', name: 'Item 2' },
@@ -170,11 +168,62 @@ export const DragHandleExample: React.VFC = () => {
 
 ```
 
-</details>
+### Use Case: Complex Component
 
-### Use Case 4: Horizontal Sortable List
+Custom Event would work as well in SortableItem Component with DragHandler.
 
-<details>
+```diff
+export const ComplexComponentExample: React.VFC = () => {
+  const [items, setItems] = useState<SortableItemProps[]>([
+    { id: '1', name: 'Item 1' },
+    { id: '2', name: 'Item 2' },
+    { id: '3', name: 'Item 3' },
+  ]);
+
+  return (
+    <SortableList items={items} setItems={setItems}>
+      {({ items }: { items: SortableItemProps[] }) => (
+        <div className="space-y-4">
+          {items.map((item: SortableItemProps) => (
++           <SortableItem
+              key={item.id}
+              id={item.id}
+              className="..."
++             DragHandler={DragHandler}
+            >
+              <input
+                type="text"
+                className="..."
+                id={item.id}
+                value={item.name}
++               onChange={(event) => {
++                 const newItems = [...items];
++                 const index = newItems.findIndex(
++                   (item) => item.id === event.target.id
++                 );
++                 newItems[index].name = event.target.value;
++                 setItems(newItems);
++               }}
+              />
+              <button
+                className="..."
++               onClick={() => {
++                 alert('delete');
++               }}
+              >
+                {/* delete icon */}
+              </button>
+            </SortableItem>
+          ))}
+        </div>
+      )}
+    </SortableList>
+  );
+};
+
+```
+
+### Use Case: Horizontal Sortable List
 
 ```jsx
 export const HorizontalExample: React.VFC = () => {
@@ -197,11 +246,7 @@ export const HorizontalExample: React.VFC = () => {
 
 ```
 
-</details>
-
 ### Optional: disabled Drag and Drop
-
-<details>
 
 ```diff
 export const ItemRenderExample: React.VFC = () => {
@@ -224,8 +269,6 @@ export const ItemRenderExample: React.VFC = () => {
   );
 };
 ```
-
-</details>
 
 ## Development
 
