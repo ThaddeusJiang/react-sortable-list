@@ -1,5 +1,4 @@
 import { useState } from '@storybook/addons';
-import { Meta } from '@storybook/react';
 import React from 'react';
 
 import {
@@ -12,7 +11,7 @@ import {
 export default {
   component: SortableList,
   title: 'components/SortableList',
-} as Meta;
+};
 
 const DragHandler = (props) => (
   <div
@@ -78,6 +77,22 @@ export const ChildrenExample: React.VFC = () => {
         </>
       )}
     </SortableList>
+  );
+};
+
+const data = Array.from({ length: 30 }, (_, index) => ({
+  id: `${index}`,
+  name: `Item ${index}`,
+}));
+
+export const DraggingScrollingExample: React.VFC = () => {
+  const [items, setItems] = useState<SortableItemProps[]>(data);
+  return (
+    <SortableList
+      items={items}
+      setItems={setItems}
+      itemRender={({ item }: ItemRenderProps) => <Item name={item.name} />}
+    />
   );
 };
 
