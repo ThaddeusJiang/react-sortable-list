@@ -20,7 +20,7 @@ You should focus the `features` of your app, not DnD boilerplate.
 ## Install
 
 ```sh
-yarn add @thaddeusjiang/react-sortable-list
+npm install @thaddeusjiang/react-sortable-list
 ```
 
 ## Usage
@@ -114,7 +114,6 @@ export const ChildrenExample: React.VFC = () => {
 ### Use Case: Custom Drag Handler
 
 ```jsx
-
 const DragHandler = (props) => (
   <div
     {...props}
@@ -165,7 +164,6 @@ export const DragHandlerExample: React.VFC = () => {
     </SortableList>
   );
 };
-
 ```
 
 ### Use Case: Complex Component
@@ -220,7 +218,6 @@ export const ComplexComponentExample: React.VFC = () => {
     </SortableList>
   );
 };
-
 ```
 
 ### Use Case: Horizontal Sortable List
@@ -243,7 +240,6 @@ export const HorizontalExample: React.VFC = () => {
     </div>
   );
 };
-
 ```
 
 ### Optional: disabled Drag and Drop
@@ -277,7 +273,7 @@ export const ItemRenderExample: React.VFC = () => {
 Run inside another terminal:
 
 ```bash
-yarn storybook
+npm run storybook
 ```
 
 ### Example
@@ -285,18 +281,18 @@ yarn storybook
 Then run the example inside another:
 
 ```bash
-yarn link
+npm run link
 
 cd example
-yarn link "@thaddeusjiang/react-sortable-list"
-yarn # or yarn to install dependencies
-yarn start
+npm run link "@thaddeusjiang/react-sortable-list"
+npm install
+npm run start
 ```
 
 ### Run tests
 
 ```sh
-yarn run test
+npm run run test
 ```
 
 ## Author

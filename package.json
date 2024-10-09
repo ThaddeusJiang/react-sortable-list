@@ -18,8 +18,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build-tailwind": "NODE_ENV=production npx tailwindcss -o ./dist/index.css --minify",
-    "build": "tsdx build && yarn build-tailwind",
-    "prepare": "yarn build"
+    "build": "tsdx build && npm run build-tailwind",
+    "prepare": "npm run build"
   },
   "peerDependencies": {
     "react": ">=16"
